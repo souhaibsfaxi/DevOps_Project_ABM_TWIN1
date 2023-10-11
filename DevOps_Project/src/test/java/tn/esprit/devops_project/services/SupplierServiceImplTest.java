@@ -1,38 +1,106 @@
 package tn.esprit.devops_project.services;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import tn.esprit.devops_project.entities.Supplier;
+import tn.esprit.devops_project.repositories.SupplierRepository;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
-class SupplierServiceImplTest {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+public class SupplierServiceImplTest {
+
+    @InjectMocks
+    private SupplierServiceImpl supplierService;
+
+    @Mock
+    private SupplierRepository supplierRepository;
 
     @BeforeEach
-    void setUp() {
-    }
-
-    @AfterEach
-    void tearDown() {
+    public void setup() {
+        MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    void retrieveAllSuppliers() {
+    public void canRetrieveAllSuppliers() {
+        // Arrange
+        List<Supplier> expectedSuppliers = new ArrayList<>();
+        Mockito.when(supplierRepository.findAll()).thenReturn(expectedSuppliers);
+
+        // Act
+        List<Supplier> actualSuppliers = supplierService.retrieveAllSuppliers();
+
+        // Assert
+        assertEquals(expectedSuppliers, actualSuppliers);
     }
 
     @Test
-    void addSupplier() {
+    public void canAddSupplier() {
+        // Arrange
+        Supplier supplier = new Supplier();
+        Mockito.when(supplierRepository.save(supplier)).thenReturn(supplier);
+
+        // Act
+        Supplier addedSupplier = supplierService.addSupplier(supplier);
+
+        // Assert
+        assertEquals(supplier, addedSupplier);
     }
 
     @Test
-    void updateSupplier() {
+    public void canUpdateSupplier() {
+        // Arrange
+        Supplier supplier = new Supplier();
+        Mockito.when(supplierRepository.save(supplier)).thenReturn(supplier);
+
+        // Act
+        Supplier updatedSupplier = supplierService.updateSupplier(supplier);
+
+        // Assert
+        assertEquals(supplier, updatedSupplier);
     }
 
     @Test
-    void deleteSupplier() {
+    public void canDeleteSupplier() {
+        // Arrange
+        Long supplierId = 1L;
+
+        // Act
+        supplierService.deleteSupplier(supplierId);
+
+        // Assert
+        Mockito.verify(supplierRepository).deleteById(supplierId);
     }
 
     @Test
-    void retrieveSupplier() {
+    public void canRetrieveSupplier() {
+        // Arrange
+        Long supplierId = 1L;
+        Supplier expectedSupplier = new Supplier();
+        Mockito.when(supplierRepository.findById(supplierId)).thenReturn(Optional.of(expectedSupplier));
+
+        // Act
+        Supplier retrievedSupplier = supplierService.retrieveSupplier(supplierId);
+
+        // Assert
+        assertEquals(expectedSupplier, retrievedSupplier);
+    }
+
+    @Test
+    public void testRetrieveSupplierInvalidId() {
+        // Arrange
+        Long supplierId = 1L;
+        Mockito.when(supplierRepository.findById(supplierId)).thenReturn(Optional.empty());
+
+        // Act and Assert
+        assertThrows(IllegalArgumentException.class, () -> supplierService.retrieveSupplier(supplierId));
     }
 }
