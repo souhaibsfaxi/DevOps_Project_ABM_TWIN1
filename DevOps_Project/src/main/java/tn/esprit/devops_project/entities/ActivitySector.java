@@ -25,11 +25,13 @@ public class ActivitySector  implements Serializable {
         String codeSecteurActivite;
         String libelleSecteurActivite;
 
+
         public ActivitySector(Long idSecteurActivite, String codeSecteurActivite, String libelleSecteurActivite) {
                 this.idSecteurActivite = idSecteurActivite;
                 this.libelleSecteurActivite = libelleSecteurActivite;
                 this.codeSecteurActivite = codeSecteurActivite;
         }
+
         @ManyToMany(mappedBy="activitySectors")
         @JsonIgnore
         private Set<Supplier> suppliers;
