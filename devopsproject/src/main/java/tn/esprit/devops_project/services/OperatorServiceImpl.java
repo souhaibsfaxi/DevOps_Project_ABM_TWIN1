@@ -40,7 +40,7 @@ public class OperatorServiceImpl implements IOperatorService {
 
 	@Override
 	public Operator retrieveOperator(Long id) {
-		return operatorRepository.findById(id).orElseThrow(() -> new NullPointerException("Operator not found"));
+		return operatorRepository.findById(id).orElse(null);
 	}
 
 }

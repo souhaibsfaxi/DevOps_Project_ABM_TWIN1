@@ -4,6 +4,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import tn.esprit.devops_project.entities.Operator;
 
+@Repository
 public interface OperatorRepository extends CrudRepository<Operator, Long> {
 
 }

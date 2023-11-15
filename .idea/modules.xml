@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/DevOps_Project.iml" filepath="$PROJECT_DIR$/.idea/DevOps_Project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DevOps_Project/DevOps_Project.iml" filepath="$PROJECT_DIR$/DevOps_Project/DevOps_Project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/DevOps_Project_ABM_TWIN1.iml" filepath="$PROJECT_DIR$/.idea/DevOps_Project_ABM_TWIN1.iml" />
     </modules>
   </component>
 </project>
