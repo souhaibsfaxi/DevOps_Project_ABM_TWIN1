@@ -8,7 +8,7 @@ WORKDIR /app
 COPY target/devopsproject-2.1.jar app.jar
 
 # Expose the port that your Spring Boot application will listen on
-EXPOSE 8080
+EXPOSE 8089
 
 # Define the command to run your Spring Boot application
 CMD ["java", "-jar", "app.jar"]
