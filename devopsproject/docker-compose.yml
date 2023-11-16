@@ -1,20 +1,19 @@
-version: '3.8'
+version: '3'
 
 services:
-  # MySQL database service
+
+ # MySQL service
   mysql:
     image: mysql
+    container_name: mysqldb
     environment:
       MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: devops
     ports:
       - "3306:3306"
-    volumes:
-      - mysql-data:/var/lib/mysql
-    networks:
-      - mynetwork
 
   # Spring Boot application service
-  app:
+  spring-app:
     build:
       context: .
       dockerfile: Dockerfile
@@ -23,13 +22,8 @@ services:
     depends_on:
       - mysql
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/devops?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/devops
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
-    networks:
-      - mynetwork
 
-volumes:
-  mysql-data:
-networks:
-  mynetwork:
+ 
